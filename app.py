@@ -7,6 +7,12 @@ app.config['FLASK_DEBUG'] = True
 app.config['SECRET_KEY'] = '3'
 
 
+def session_append(session_list, apendee):
+    temp = session_list
+    temp.append(apendee)
+    return temp
+
+
 @app.route('/')
 @app.route('/home')
 def home():
@@ -29,17 +35,13 @@ def payday():
         if 'paydays' not in session:
             print('p1 did not exist; now does')
             session['paydays'] = []
-            temp_list = session['paydays']
-            temp_list.append(temp.to_json())
-            session['paydays'] = temp_list
+            session['paydays'] = session_append(session['paydays'], temp.to_json())
             print(session)
             print(session['paydays'])
             return redirect(url_for('payday'))
         else:
             # session['hokay'] = 'gofuckflask'
-            temp_list = session['paydays']
-            temp_list.append(temp.to_json())
-            session['paydays'] = temp_list
+            session['paydays'] = session_append(session['paydays'], temp.to_json())
             print('p1 exists; now p2 does as well')
             print(session)
             print(session['paydays'])
@@ -56,8 +58,8 @@ def bill():
         amount = form.amount.data
         date = form.date.data
         temp = bills.Bill(name, amount, date)
-        some_bill = session[temp.name] = temp.to_json()
-        session['bills'].append(some_bill)
+        session['bills'] = session_append(session['bills'], temp.to_json())
+        print(session)
         print(session['bills'])
 
         if form.add_bill.data is True:
@@ -67,7 +69,6 @@ def bill():
 
     # amount = request.args.get('a')
     # date = request.args.get('d')
-    # return render_template('bill.html', title='Bill', form=form)
     # return render_template('bill.html', title='Bill', form=form, a=amount, d=date)
     return render_template('bill.html', title='bill', form=form,
                            p1a=session['paydays'][0]['amount'], p1d=session['paydays'][0]['date'],
@@ -88,6 +89,7 @@ def debt():
 
 @app.route('/bill_output')
 def bill_output():
+    print(session['bills'])
     paydays_list = []
     bills_list = []
     for i in session['paydays']:
