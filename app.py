@@ -12,15 +12,7 @@ app.config['SECRET_KEY'] = '3'
 def home():
     session.clear()
     session['bills'] = []
-    session['paydays'] = []
-    # session['paydays'].append(1)
-    # session['paydays'].append(2)
-    # session['paydays'].append(3)
-    # print(session)
-    # print(session['paydays'])
-    # print(session['paydays'][0])
-    # print(session['paydays'][1])
-    # print(session['paydays'][2])
+    # session['paydays'] = []
 
     return render_template('home.html')
 
@@ -34,21 +26,24 @@ def payday():
         temp = bills.PayDay(amount, date)
         print(session)
 
-        if len(session['paydays']) == 0:
+        if 'paydays' not in session:
             print('p1 did not exist; now does')
-            session['p1'] = temp.to_json()
-            session['paydays'].append(temp.to_json())
+            session['paydays'] = []
+            temp_list = session['paydays']
+            temp_list.append(temp.to_json())
+            session['paydays'] = temp_list
             print(session)
             print(session['paydays'])
             return redirect(url_for('payday'))
         else:
-            session['p2'] = temp.to_json()
-            session['paydays'].append(temp.to_json())
+            # session['hokay'] = 'gofuckflask'
+            temp_list = session['paydays']
+            temp_list.append(temp.to_json())
+            session['paydays'] = temp_list
             print('p1 exists; now p2 does as well')
             print(session)
             print(session['paydays'])
             return redirect(url_for('bill'))
-
         # return redirect(url_for('bill', a=amount, d=date))
     return render_template('payday.html', title='Payday', form=form)
 
@@ -72,10 +67,6 @@ def bill():
 
     # amount = request.args.get('a')
     # date = request.args.get('d')
-
-    print(session['paydays'][0])
-    print(session['paydays'][1])
-    print(len(session['paydays']))
     # return render_template('bill.html', title='Bill', form=form)
     # return render_template('bill.html', title='Bill', form=form, a=amount, d=date)
     return render_template('bill.html', title='bill', form=form,
