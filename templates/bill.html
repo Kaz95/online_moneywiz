@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+{% block some_content %}
+    <h1>p1</h1>
+    <h5>Amount: {{ p1a }}</h5>
+    <h5>Date: {{ p1d }}</h5>
+    <br>
+    <h1>p2</h1>
+    <h5>Amount: {{ p2a }}</h5>
+    <h5>Date: {{ p2d }}</h5>
+
+    <div>
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.name.label() }}
+                {{ form.name() }}
+            </div>
+            <div>
+                {{ form.amount.label() }}
+                {{ form.amount() }}
+            </div>
+            <div>
+                {{ form.date.label() }}
+                {{ form.date() }}
+            </div>
+            <div>
+                {{ form.add_bill() }}
+                {{ form.done() }}
+                <button onclick="window.location.href='bill_output'">Done Button</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

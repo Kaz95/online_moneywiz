@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block some_content %}
+    <h3 align="center">Menu</h3>
+    <div align="center">
+        <button onclick="window.location.href = 'payday'">Bills</button>
+        <button onclick="window.location.href = 'debt'">Debts</button>
+        <button onclick="alert('This will be both later.')">Both</button>
+    </div>
+
+{% endblock %}

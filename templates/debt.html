@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block some_content %}
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.name.label }}
+            {{ form.name }}
+        </div>
+        <div>
+            {{ form.principal.label }}
+            {{ form.principal }}
+        </div>
+        <div>
+            {{ form.interest_rate.label }}
+            {{ form.interest_rate }}
+        </div>
+        <div>
+            {{ form.minimum.label }}
+            {{ form.minimum }}
+        </div>
+    </form>
+{% endblock %}

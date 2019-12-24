@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% if title %}
+            <title>MoneyWiz - {{ title }}</title>
+        {% else %}
+            <title>MoneyWiz</title>
+        {% endif %}
+    </head>
+    <body>
+        {% block some_content %}{% endblock %}
+    </body>
+</html>
