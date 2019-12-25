@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 {% block some_content %}
+    <h2>Income: {{ income }}</h2>
     <form action="" method="post">
         {{ form.hidden_tag() }}
         <div>
@@ -17,6 +18,10 @@
         <div>
             {{ form.minimum.label }}
             {{ form.minimum }}
+        </div>
+        <div>
+            {{ form.submit }}
+            <button onclick="window.location.href = 'debt_output'">Done Button</button>
         </div>
     </form>
 {% endblock %}

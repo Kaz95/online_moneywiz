@@ -12,20 +12,20 @@
         <form action="" method="post">
             {{ form.hidden_tag() }}
             <div>
-                {{ form.name.label() }}
-                {{ form.name() }}
+                {{ form.name.label }}
+                {{ form.name }}
             </div>
             <div>
-                {{ form.amount.label() }}
-                {{ form.amount() }}
+                {{ form.amount.label }}
+                {{ form.amount }}
             </div>
             <div>
-                {{ form.date.label() }}
-                {{ form.date() }}
+                {{ form.date.label }}
+                {{ form.date }}
             </div>
             <div>
-                {{ form.add_bill() }}
-                {{ form.done() }}
+                {{ form.add_bill }}
+                {{ form.done }}
                 <button onclick="window.location.href='bill_output'">Done Button</button>
             </div>
         </form>

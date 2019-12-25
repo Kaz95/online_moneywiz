@@ -1,10 +1,10 @@
 from flask import Flask, render_template, redirect, url_for, session
 from forms import BillForm, PaydayForm, IncomeForm, DebtForm
 import bills
+import debts
 
 app = Flask(__name__)
-app.config['FLASK_DEBUG'] = True
-app.config['SECRET_KEY'] = '3'
+app.config['SECRET_KEY'] = 'dev'
 
 
 def session_append(session_list, apendee):
@@ -19,6 +19,7 @@ def home():
     session.clear()
     session['bills'] = []
     # session['paydays'] = []
+    session['debts'] = []
 
     return render_template('home.html')
 
@@ -75,36 +76,71 @@ def bill():
                            p2a=session['paydays'][1]['amount'], p2d=session['paydays'][1]['date'])
 
 
-@app.route('/income')
+@app.route('/income', methods=['POST', 'GET'])
 def income():
     form = IncomeForm()
+    if form.validate_on_submit():
+        session['income'] = form.amount.data
+        return redirect(url_for('debt'))
+
     return render_template('income.html', title='Income', form=form)
 
 
-@app.route('/debt')
+@app.route('/debt', methods=['POST', 'GET'])
 def debt():
     form = DebtForm()
-    return render_template('debt.html', title='Debt', form=form)
+    if form.validate_on_submit():
+        name = form.name.data
+        principal = form.principal.data
+        interest = form.interest_rate.data
+        minimum = form.minimum.data
+        temp = debts.Debt(name, principal, interest, minimum)
+        session['debts'] = session_append(session['debts'], temp.to_json())
+        return redirect(url_for('debt'))
+
+    return render_template('debt.html', title='Debt', form=form, income=session['income'])
 
 
 @app.route('/bill_output')
 def bill_output():
-    print(session['bills'])
+
     paydays_list = []
     bills_list = []
+
     for i in session['paydays']:
         paydays_list.append(bills.PayDay.from_json(i))
     for i in session['bills']:
         bills_list.append(bills.Bill.from_json(i))
 
     some_string, some_dict, enough, leftover = bills.run(paydays_list, bills_list, paydays_list[0], paydays_list[1])
+
     return render_template('bill_output.html', title='Bill Output', enough=enough, leftover=leftover)
 
 
 @app.route('/debt_output')
 def debt_output():
-    return render_template('debt_output.html', title='Debt Output')
+    linked_list = debts.LinkedList()
+    debts_list = []
+
+    for i in session['debts']:
+        debts_list.append(debts.Debt.from_json(i))
+    for i in debts_list:
+        linked_list.auto_insert(i)
+
+    linked_list.income = int(session['income'])
+
+    linked_list.preserve_payoff_priority()
+    payoff_prio = linked_list.pay_off_priority_list
+    payoff_month_dict = linked_list.pay_off_month_dictionary
+
+    output = linked_list.run_payoff()
+
+    return render_template('debt_output.html',
+                           title='Debt Output',
+                           output=output,
+                           payoff_prio=payoff_prio,
+                           payoff_month_dict=payoff_month_dict)
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

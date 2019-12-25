@@ -87,7 +87,7 @@ def run(payday_list, bills_list, payday1, payday2):
     paydays_sum = PayDay.add_amounts(payday_list)
     bills_sum = Bill.add_amounts(bills_list)
 
-    # Leftover will be the value passed to debt.py
+    # Leftover will be the value passed to debts.py
     left_over = paydays_sum - bills_sum
 
     # Decide if there is enough money overall
