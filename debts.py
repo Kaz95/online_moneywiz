@@ -15,7 +15,9 @@ class Debt:
 
     @staticmethod
     def from_json(some_json):
-        temp = Debt(some_json['name'], int(some_json['principal']), int(some_json['interest']), int(some_json['minimum']))
+        percent_interest = int(some_json['interest'])
+        percent_interest = percent_interest / 100
+        temp = Debt(some_json['name'], int(some_json['principal']), percent_interest, int(some_json['minimum']))
         return temp
 
 
