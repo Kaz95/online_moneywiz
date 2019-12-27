@@ -1,30 +1,31 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired, Length
+from wtforms import StringField, SubmitField, IntegerField
+# from wtforms.fields.html5 import
+from wtforms.validators import DataRequired, Length, NumberRange
 
 
 class PaydayForm(FlaskForm):
-    amount = StringField('Amount', validators=[DataRequired()])
-    date = StringField('Date', validators=[DataRequired()])
+    amount = IntegerField('Amount', validators=[DataRequired()], render_kw={'placeholder': 2})
+    date = IntegerField('Date', validators=[DataRequired(), NumberRange(min=1, max=31)], default=14)
     submit = SubmitField('Add Payday')
 
 
 class BillForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(min=2, max=20)])
-    amount = StringField('Amount', validators=[DataRequired()])
-    date = StringField('Date', validators=[DataRequired()])
+    amount = IntegerField('Amount', validators=[DataRequired()])
+    date = IntegerField('Date', validators=[DataRequired(), NumberRange(min=1, max=31)])
     add_bill = SubmitField('Add Bill')
     done = SubmitField('Done')
 
 
 class IncomeForm(FlaskForm):
-    amount = StringField('Amount', validators=[DataRequired()])
+    amount = IntegerField('Amount', validators=[DataRequired()])
     submit = SubmitField('Add Income')
 
 
 class DebtForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(min=2, max=20)])
-    principal = StringField('Principal', validators=[DataRequired()])
-    interest_rate = StringField('Interest Rate', validators=[DataRequired()])
-    minimum = StringField('Minimum', validators=[DataRequired()])
+    principal = IntegerField('Principal', validators=[DataRequired()])
+    interest_rate = IntegerField('Interest Rate', validators=[DataRequired(), NumberRange(min=0, max=100)])
+    minimum = IntegerField('Minimum', validators=[DataRequired()])
     submit = SubmitField('Add Debt')
