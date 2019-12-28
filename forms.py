@@ -10,9 +10,9 @@ class PaydayForm(FlaskForm):
                           render_kw={'placeholder': 'Amount'},
                           default=123)
     date = IntegerField('Date',
-                        validators=[DataRequired(), NumberRange(min=1, max=31)],
+                        validators=[DataRequired()],
                         default=1,
-                        render_kw={'placeholder': '1-31'})
+                        render_kw={'placeholder': '1-31', 'min': 1, 'max': 31})
     submit = SubmitField('Add Payday')
 
 
