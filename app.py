@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, session
+from flask import Flask, render_template, redirect, url_for, session, request
 from forms import BillForm, PaydayForm, IncomeForm, DebtForm
 import bills
 import debts
@@ -54,6 +54,9 @@ def payday():
 @app.route('/bill', methods=['POST', 'GET'])
 def bill():
     form = BillForm()
+    if request.method == 'POST':
+        if form.done.data is True:
+            return redirect(url_for('bill_output'))
     if form.validate_on_submit():
         name = form.name.data
         amount = form.amount.data
@@ -63,10 +66,12 @@ def bill():
         print(session)
         print(session['bills'])
 
-        if form.add_bill.data is True:
-            return redirect(url_for('bill'))
-        elif form.done.data is True:
-            return redirect(url_for('bill_output'))
+        return redirect(url_for('bill'))
+
+        # if form.add_bill.data is True:
+        #     return redirect(url_for('bill'))
+        # elif form.done.data is True:
+        #     return redirect(url_for('bill_output'))
 
     # amount = request.args.get('a')
     # date = request.args.get('d')
