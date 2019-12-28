@@ -19,7 +19,7 @@ class PaydayForm(FlaskForm):
 class BillForm(FlaskForm):
     name = StringField('Name',
                        validators=[DataRequired(), Length(min=2, max=20)],
-                       render_kw={'placeholder': 'Name'},
+                       render_kw={'placeholder': 'Name', 'maxlength': 20},
                        default='Ima Bill')
     amount = IntegerField('Amount',
                           validators=[DataRequired()],
@@ -44,7 +44,7 @@ class IncomeForm(FlaskForm):
 class DebtForm(FlaskForm):
     name = StringField('Name',
                        validators=[DataRequired(), Length(min=2, max=20)],
-                       render_kw={'placeholder': 'Name'},
+                       render_kw={'placeholder': 'Name', 'maxlength': 20},
                        default='Credit Card')
     principal = IntegerField('Principal',
                              validators=[DataRequired()],
