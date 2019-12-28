@@ -8,10 +8,11 @@
         </div>
         <div>
             {{ form.date.label }}
-            {{ form.date }}
+            {{ form.date(min=1, max=31) }}
         </div>
         <div>
             {{ form.submit }}
         </div>
     </form>
+
 {% endblock %}

@@ -12,7 +12,7 @@ class PaydayForm(FlaskForm):
     date = IntegerField('Date',
                         validators=[DataRequired(), NumberRange(min=1, max=31)],
                         default=1,
-                        render_kw={'placeholder': 'Date: 1-31'})
+                        render_kw={'placeholder': '1-31'})
     submit = SubmitField('Add Payday')
 
 
@@ -27,7 +27,7 @@ class BillForm(FlaskForm):
                           default=123)
     date = IntegerField('Date',
                         validators=[DataRequired(), NumberRange(min=1, max=31)],
-                        render_kw={'placeholder': 'Date: 1-31'},
+                        render_kw={'placeholder': '1-31'},
                         default=2)
     add_bill = SubmitField('Add Bill')
     done = SubmitField('Done')

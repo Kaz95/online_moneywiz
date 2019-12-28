@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, session, request
+from flask import Flask, render_template, redirect, url_for, session, request, flash
 from forms import BillForm, PaydayForm, IncomeForm, DebtForm
 import bills
 import debts
@@ -47,6 +47,13 @@ def payday():
             print(session)
             print(session['paydays'])
             return redirect(url_for('bill'))
+    # else:
+    #     if form.amount.errors:
+    #         for error in form.amount.errors:
+    #             flash(error)
+    #     if form.date.errors:
+    #         for error in form.date.errors:
+    #             flash(error)
         # return redirect(url_for('bill', a=amount, d=date))
     return render_template('payday.html', title='Payday', form=form)
 
