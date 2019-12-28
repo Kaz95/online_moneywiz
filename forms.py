@@ -26,8 +26,8 @@ class BillForm(FlaskForm):
                           render_kw={'placeholder': 'Amount'},
                           default=123)
     date = IntegerField('Date',
-                        validators=[DataRequired(), NumberRange(min=1, max=31)],
-                        render_kw={'placeholder': '1-31'},
+                        validators=[DataRequired()],
+                        render_kw={'placeholder': '1-31', 'min': 1, 'max': 31},
                         default=2)
     add_bill = SubmitField('Add Bill')
     done = SubmitField('Done')
@@ -51,8 +51,8 @@ class DebtForm(FlaskForm):
                              render_kw={'placeholder': 'Principal'},
                              default=40)
     interest_rate = IntegerField('Interest Rate',
-                                 validators=[DataRequired(), NumberRange(min=0, max=100)],
-                                 render_kw={'placeholder': 'Interest Rate: 0-100'})
+                                 validators=[DataRequired()],
+                                 render_kw={'placeholder': 'Interest Rate: 0-100', 'min': 0, 'max': 100})
     minimum = IntegerField('Minimum',
                            validators=[DataRequired()],
                            render_kw={'placeholder': 'Minimum'},
