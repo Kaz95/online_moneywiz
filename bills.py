@@ -29,9 +29,6 @@ class Bill(PayDay):
         PayDay.__init__(self, amount, date)
         self.name = name
 
-    def to_json(self):
-        return self.__dict__
-
     @staticmethod
     def from_json(some_json):
         temp = Bill(some_json['name'], int(some_json['amount']), int(some_json['date']))
@@ -48,18 +45,6 @@ class Bill(PayDay):
                 pp2.append(bill)
 
         return pp1, pp2
-
-
-# Create and return a PayDay object from user string input
-def create_payday(amount, date):
-    payday = PayDay(int(amount), int(date))
-    return payday
-
-
-# Create and return a Bill object from user string input
-def create_bill(name, amount, date):
-    bill = Bill(name, int(amount), int(date))
-    return bill
 
 
 # Parses a dictionary and uses value retrieved for text output.
