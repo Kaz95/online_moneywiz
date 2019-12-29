@@ -69,7 +69,7 @@ def bill():
         if form.done.data is True:
             return redirect(url_for('bill_output'))
     if form.validate_on_submit():
-        name = form.name.data
+        name = strip_whitespace(form.name.data)
         amount = form.amount.data
         date = form.date.data
         temp = bills.Bill(name, amount, date)
@@ -106,7 +106,8 @@ def income():
 def debt():
     form = DebtForm()
     if form.validate_on_submit():
-        name = form.name.data
+        name = strip_whitespace(form.name.data)
+        # name = form.name.data
         principal = form.principal.data
         interest = form.interest_rate.data
         minimum = form.minimum.data
