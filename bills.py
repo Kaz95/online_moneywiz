@@ -10,7 +10,7 @@ class PayDay:
 
     @staticmethod
     def from_json(some_json):
-        temp = PayDay(int(some_json['amount']), int(some_json['date']))
+        temp = PayDay(some_json['amount'], some_json['date'])
         return temp
 
     @staticmethod
@@ -31,7 +31,7 @@ class Bill(PayDay):
 
     @staticmethod
     def from_json(some_json):
-        temp = Bill(some_json['name'], int(some_json['amount']), int(some_json['date']))
+        temp = Bill(some_json['name'], some_json['amount'], some_json['date'])
         return temp
 
     @staticmethod

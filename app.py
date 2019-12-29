@@ -124,6 +124,11 @@ def bill_output():
     for i in session['bills']:
         bills_list.append(bills.Bill.from_json(i))
 
+    print(type(bills_list[0].amount))
+    print(type(bills_list[0].date))
+    print(type(paydays_list[0].amount))
+    print(type(paydays_list[0].date))
+
     some_string, some_dict, enough, leftover = bills.run(paydays_list, bills_list, paydays_list[0], paydays_list[1])
 
     return render_template('bill_output.html', title='Bill Output', enough=enough, leftover=leftover)
@@ -139,7 +144,7 @@ def debt_output():
     for i in debts_list:
         linked_list.auto_insert(i)
 
-    linked_list.income = int(session['income'])
+    linked_list.income = session['income']
 
     linked_list.preserve_payoff_priority()
     payoff_prio = linked_list.pay_off_priority_list
