@@ -13,6 +13,10 @@ def session_append(session_list, apendee):
     return temp
 
 
+def strip_whitespace(some_string):
+    return " ".join(some_string.split())
+
+
 @app.route('/')
 @app.route('/home')
 def home():
