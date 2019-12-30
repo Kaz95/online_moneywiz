@@ -131,7 +131,7 @@ def bill_output():
     for i in session['bills']:
         bills_list.append(bills.Bill.from_json(i))
 
-    some_string, some_dict, enough, leftover = bills.run(paydays_list, bills_list, paydays_list[0], paydays_list[1])
+    enough, leftover = bills.run(paydays_list, bills_list, paydays_list[0], paydays_list[1])
 
     return render_template('bill_output.html', title='Bill Output', enough=enough, leftover=leftover)
 

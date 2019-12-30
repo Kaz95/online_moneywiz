@@ -51,25 +51,8 @@ class Bill(PayDay):
         return pp1, pp2
 
 
-# Parses a dictionary and uses value retrieved for text output.
-# If passed a dictionary with leftover as None as a param, assumes not enough money.
-def construct_output_string(some_dict):
-    if some_dict['leftover'] is not None:
-        text = "You have enough!" \
-               f"You have {some_dict['leftover']} leftover" \
-               "Save some amount from some pay period. Fix ASAP"
-
-    else:
-        text = "You don't have enough!"
-
-    return text
-
-
 # Main bills function. Returns an pre-formatted output string.
 def run(payday_list, bills_list, payday1, payday2):
-    # Create a dictionary to hold values used for string output
-    output_dictionary = {'leftover': None}
-
     # Find totals of each list of objects
     paydays_sum = PayDay.add_amounts(payday_list)
     bills_sum = Bill.add_amounts(bills_list)
@@ -83,12 +66,10 @@ def run(payday_list, bills_list, payday1, payday2):
     if left_over < 0:
         print("You don't have enough money!")
         enough = False
-        # output_dictionary = False
 
     # If leftover is greater than 0 assign it as a value of its respective key.
     else:
         enough = True
-        output_dictionary['leftover'] = left_over
         print("You have enough money!")
         print(f"You have {left_over} left over")
 
@@ -114,6 +95,4 @@ def run(payday_list, bills_list, payday1, payday2):
         else:
             print(f"Save {pp2sum - payday2.amount} from pp1")
 
-    # Final bills output string
-    output_string = construct_output_string(output_dictionary)
-    return output_string, output_dictionary, enough, left_over
+    return enough, left_over
