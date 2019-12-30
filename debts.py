@@ -18,6 +18,12 @@ class Debt:
         temp = Debt(some_json['name'], some_json['principal'], percent_interest, some_json['minimum'])
         return temp
 
+# Test debts
+# d1 = Debt("credit card", 40, .04, 10)
+# d2 = Debt("loan", 60, .03, 10)
+# d3 = Debt("car", 20, .02, 10)
+# d4 = Debt("Something", 100, .01, 10)
+
 
 # Helper class for linked list.
 class Node:
@@ -240,62 +246,3 @@ class LinkedList:
         while cur:
             self.pay_off_priority_list.append(cur)
             cur = cur.next
-
-    def construct_debt_priority_output(self):
-        text = "Priority\n"
-        count = 1
-        for debt in self.pay_off_priority_list:
-            text += (f"{count}.) " + debt.data.name + "\n")
-            count += 1
-
-        return text
-
-    def construct_debt_payoff_output(self):
-        text = "Months to Payoff\n"
-
-        for tup in self.pay_off_month_dictionary.items():
-            temp = f"{tup[0]} - {tup[1]} months to payoff\n"
-            text += temp
-
-        return text
-
-
-# Only used for exploratory testing. Remove at some point.
-def run(income=None):
-    # Test debts
-    d1 = Debt("credit card", 40, .04, 10)
-    d2 = Debt("loan", 60, .03, 10)
-    d3 = Debt("car", 20, .02, 10)
-    d4 = Debt("Something", 100, .01, 10)
-
-    linked_list = LinkedList()
-
-    if income:
-        linked_list.income = income
-    else:
-        linked_list.income = 50
-
-    linked_list.auto_insert(d1)
-    linked_list.auto_insert(d2)
-    linked_list.auto_insert(d3)
-    linked_list.auto_insert(d4)
-
-    linked_list.print_list()
-
-    # Logic that decides if there is enough money to cover mins.
-    if linked_list.income > linked_list.minimums:
-        linked_list.leftover = this_many = linked_list.income - linked_list.minimums
-        print(f"You have {this_many} extra!")
-    elif linked_list.income == linked_list.minimums:
-        print("Just pay your minimums in order!")
-    else:
-        print("With ya broke ass.")
-
-    linked_list.preserve_payoff_priority()
-    print(linked_list.construct_debt_priority_output())
-    print(f"{linked_list.run_payoff()} month(s) till payoff")
-    print(linked_list.construct_debt_payoff_output())
-
-
-if __name__ == '__main__':
-    run()
