@@ -2,7 +2,6 @@
 
 
 class PayDay:
-
     def __init__(self, amount, date):
         self.amount = amount
         self.date = date
@@ -28,7 +27,6 @@ class PayDay:
 
 
 class Bill(PayDay):
-
     def __init__(self, name, amount, date):
         PayDay.__init__(self, amount, date)
         self.name = name

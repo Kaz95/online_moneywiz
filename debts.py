@@ -188,16 +188,21 @@ class LinkedList:
     # Returns number of months till all debts are paid based on available information.
     def run_payoff(self):
         print(f"Minimums: {self.minimums}")
+
         if self.minimums > self.income:
             return "You don't have enough to cover minimums, refinance."
+
         self.leftover = self.income - self.minimums
+
         while self.head:
             cur, prev = self.prime_cursors()
             self.temp_leftover += self.leftover
+
             while cur:
                 if cur == self.head:
                     cur.data.principal -= (cur.data.minimum + self.temp_leftover)
                     self.temp_leftover = 0
+
                     if cur.data.principal <= 0:
                         self.add_to_leftover(cur)
                         self.spill()
@@ -209,6 +214,7 @@ class LinkedList:
                         self.interest_already_paid_list.append(cur)
                 else:
                     cur.data.principal -= cur.data.minimum
+
                     if cur.data.principal <= 0:
                         print(cur.data.name, f"paid off in {self.months_to_payoff + 1} months(s)")
                         self.pay_off_month_dictionary[cur.data.name] = self.months_to_payoff + 1
@@ -218,6 +224,7 @@ class LinkedList:
                         self.need_refinance = self.generate_interest(cur)
                         print(cur.data.name, round(cur.data.principal, 2))
                         self.interest_already_paid_list.append(cur)
+
                 if self.need_refinance is True:
                     self.head = None
                     break
@@ -227,6 +234,7 @@ class LinkedList:
 
         if self.need_refinance is True:
             return "Refinance, a debts interest is too high."
+
         print(self.pay_off_month_dictionary)
 
     # Traverse list and append each node to a list
@@ -246,7 +254,6 @@ class LinkedList:
         return text
 
     def construct_debt_payoff_output(self):
-
         text = "Months to Payoff\n"
 
         for tup in self.pay_off_month_dictionary.items():

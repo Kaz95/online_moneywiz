@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, session, request, flash
+from flask import Flask, render_template, redirect, url_for, session, request
 from forms import BillForm, PaydayForm, IncomeForm, DebtForm
 import bills
 import debts
@@ -41,7 +41,6 @@ def home():
     session.clear()
     session['bills'] = []
     session['debts'] = []
-
     return render_template('home.html')
 
 
@@ -77,6 +76,7 @@ def bill():
     if request.method == 'POST':
         if form.done.data is True:
             return redirect(url_for('bill_output'))
+
     if form.validate_on_submit():
         name = strip_whitespace(form.name.data)
         amount = form.amount.data
@@ -123,7 +123,6 @@ def debt():
 # See relevant modules for more information.
 @app.route('/bill_output')
 def bill_output():
-
     paydays_list = []
     bills_list = []
 
@@ -150,12 +149,11 @@ def debt_output():
         linked_list.auto_insert(i)
 
     linked_list.income = session['income']
-
     linked_list.preserve_payoff_priority()
     payoff_prio = linked_list.pay_off_priority_list
-    payoff_month_dict = linked_list.pay_off_month_dictionary
 
     output = linked_list.run_payoff()
+    payoff_month_dict = linked_list.pay_off_month_dictionary
 
     return render_template('debt_output.html',
                            title='Debt Output',
