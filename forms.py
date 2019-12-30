@@ -62,5 +62,5 @@ class DebtForm(FlaskForm):
                            default=10)
     add_debt = SubmitField('Add Debt')
 
-    # TODO: Not currently used.
+    # Not currently used.
     done = SubmitField('Done')

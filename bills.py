@@ -95,7 +95,6 @@ def run(payday_list, bills_list, payday1, payday2):
         print(f"You have {left_over} left over")
 
         # Figure out which payday comes first in the month
-        # TODO: Almost certainly a better way to go about this.
         first_payday = min(payday1.date, payday2.date)
         second_payday = max(payday1.date, payday2.date)
 
@@ -109,8 +108,6 @@ def run(payday_list, bills_list, payday1, payday2):
         pp1sum = Bill.add_amounts(first_pay_period)
         pp2sum = Bill.add_amounts(second_pay_period)
 
-        # TODO: This logic assumes that p1 is first payday of the month.
-        # TODO: Fix ASAP, starting to get annoying.
         # Logic that determines which pay period has a surplus, or if both do.
         if payday1.amount > pp1sum and payday2.amount > pp2sum:
             print("I'm rich bitch!")

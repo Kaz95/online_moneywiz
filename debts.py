@@ -10,7 +10,6 @@ class Debt:
 
         self.interest_incurred = 0
 
-    # TODO: Consider making this a 'helper' function instead of a class method.
     def to_json(self):
         return self.__dict__
 
@@ -34,7 +33,6 @@ class Node:
 # Purpose modified linked list class definition
 class LinkedList:
 
-    # TODO: Try to slim this down, or at least break into logical blocks. Look up a proper init
     def __init__(self):
         self.head = None
         self.income = 0  # The value that will eventually be passed from bills.py
@@ -79,7 +77,6 @@ class LinkedList:
     # Fills linked list with debt object
     # Sorts objects into the list based on interest rate
     # Keeps running tally of minimums
-    # TODO: Decide what to do if == interest rate. Need uniform behavior for testing.
     def auto_insert(self, some_debt):
         self.minimums += some_debt.minimum
         node = Node(some_debt)
@@ -182,7 +179,6 @@ class LinkedList:
                         self.generate_interest()
                 else:
                     self.head.data.principal -= spillover
-                    # TODO: Might be able to do a normal spill here
                     self.special_spill()
 
     # Meat and potatoes function.
@@ -240,7 +236,6 @@ class LinkedList:
             self.pay_off_priority_list.append(cur)
             cur = cur.next
 
-    # TODO: I'm not even commenting this until I clean it up.
     def construct_debt_priority_output(self):
         text = "Priority\n"
         count = 1
@@ -250,7 +245,6 @@ class LinkedList:
 
         return text
 
-    # TODO: Clean it up.
     def construct_debt_payoff_output(self):
 
         text = "Months to Payoff\n"
@@ -262,7 +256,6 @@ class LinkedList:
         return text
 
 
-# TODO: Preserve test case and remove.
 # Only used for exploratory testing. Remove at some point.
 def run(income=None):
     # Test debts
@@ -273,26 +266,19 @@ def run(income=None):
 
     linked_list = LinkedList()
 
-    # TODO: Consider setting income somewhere else, or via user input.
-    # TODO: Fix when user input
     if income:
         linked_list.income = income
     else:
         linked_list.income = 50
 
-    # TODO: Find a better way to link the list.
-    # TODO: Fix when user input
-    # TODO: Unittest
     linked_list.auto_insert(d1)
     linked_list.auto_insert(d2)
     linked_list.auto_insert(d3)
     linked_list.auto_insert(d4)
 
     linked_list.print_list()
-    # Logic that decides if there is enough money to cover mins.
-    # TODO: You are currently finding & assigning leftover value here.
-    # TODO: Fix when user input
 
+    # Logic that decides if there is enough money to cover mins.
     if linked_list.income > linked_list.minimums:
         linked_list.leftover = this_many = linked_list.income - linked_list.minimums
         print(f"You have {this_many} extra!")

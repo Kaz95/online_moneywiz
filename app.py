@@ -11,6 +11,11 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'dev'
 
 
+# TODO: Implement this helper function
+def deserialize_to_list(session_list, new_list):
+    pass
+
+
 # TODO: Test This
 # Helper function to append to lists within the section dictionary.
 # Was having trouble accessing the lists directly. Probably do to some underlying implementation detail of sessions.
@@ -114,7 +119,6 @@ def debt():
     form = DebtForm()
     if form.validate_on_submit():
         name = strip_whitespace(form.name.data)
-        # name = form.name.data
         principal = form.principal.data
         interest = form.interest_rate.data
         minimum = form.minimum.data
@@ -123,11 +127,6 @@ def debt():
         return redirect(url_for('debt'))
 
     return render_template('debt.html', title='Debt', form=form, income=session['income'])
-
-
-# TODO: Implement this helper function
-def deserialize_to_list(session_list, new_list):
-    pass
 
 
 # Route for 'bills route' output. The real logic happens here using the variables assigned to the session before hand.
