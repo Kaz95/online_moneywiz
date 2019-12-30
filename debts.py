@@ -194,7 +194,6 @@ class LinkedList:
         print(f"Minimums: {self.minimums}")
         if self.minimums > self.income:
             return "You don't have enough to cover minimums, refinance."
-            # return "mins"
         self.leftover = self.income - self.minimums
         while self.head:
             cur, prev = self.prime_cursors()
@@ -232,9 +231,7 @@ class LinkedList:
 
         if self.need_refinance is True:
             return "Refinance, a debts interest is too high."
-            # return "interest"
         print(self.pay_off_month_dictionary)
-        # return self.construct_debt_payoff_output()
 
     # Traverse list and append each node to a list
     def preserve_payoff_priority(self):

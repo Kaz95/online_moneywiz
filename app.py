@@ -35,7 +35,6 @@ def strip_whitespace(some_string):
 def home():
     session.clear()
     session['bills'] = []
-    # session['paydays'] = []
     session['debts'] = []
 
     return render_template('home.html')
@@ -61,20 +60,12 @@ def payday():
             print(session['paydays'])
             return redirect(url_for('payday'))
         else:
-            # session['hokay'] = 'gofuckflask'
             session['paydays'] = session_append(session['paydays'], temp.to_json())
             print('p1 exists; now p2 does as well')
             print(session)
             print(session['paydays'])
             return redirect(url_for('bill'))
-    # else:
-    #     if form.amount.errors:
-    #         for error in form.amount.errors:
-    #             flash(error)
-    #     if form.date.errors:
-    #         for error in form.date.errors:
-    #             flash(error)
-        # return redirect(url_for('bill', a=amount, d=date))
+
     return render_template('payday.html', title='Payday', form=form)
 
 
@@ -99,14 +90,6 @@ def bill():
 
         return redirect(url_for('bill'))
 
-        # if form.add_bill.data is True:
-        #     return redirect(url_for('bill'))
-        # elif form.done.data is True:
-        #     return redirect(url_for('bill_output'))
-
-    # amount = request.args.get('a')
-    # date = request.args.get('d')
-    # return render_template('bill.html', title='Bill', form=form, a=amount, d=date)
     return render_template('bill.html', title='bill', form=form,
                            p1a=session['paydays'][0]['amount'], p1d=session['paydays'][0]['date'],
                            p2a=session['paydays'][1]['amount'], p2d=session['paydays'][1]['date'])

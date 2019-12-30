@@ -124,7 +124,3 @@ def run(payday_list, bills_list, payday1, payday2):
     # Final bills output string
     output_string = construct_output_string(output_dictionary)
     return output_string, output_dictionary, enough, left_over
-
-
-# if __name__ == '__main__':
-    # test_run()
