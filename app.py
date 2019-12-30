@@ -16,6 +16,10 @@ def deserialize_to_list(session_list, new_list):
     pass
 
 
+def to_json(some_item):
+    return some_item.__dict__
+
+
 # TODO: Test This
 # Helper function to append to lists within the section dictionary.
 # Was having trouble accessing the lists directly. Probably do to some underlying implementation detail of sessions.
@@ -57,10 +61,12 @@ def payday():
 
         if 'paydays' not in session:
             session['paydays'] = []
-            session['paydays'] = session_append(session['paydays'], temp.to_json())
+            session['paydays'] = session_append(session['paydays'], to_json(temp))
+
             return redirect(url_for('payday'))
         else:
-            session['paydays'] = session_append(session['paydays'], temp.to_json())
+            session['paydays'] = session_append(session['paydays'], to_json(temp))
+
             return redirect(url_for('bill'))
 
     return render_template('payday.html', title='Payday', form=form)
@@ -82,7 +88,8 @@ def bill():
         amount = form.amount.data
         date = form.date.data
         temp = bills.Bill(name, amount, date)
-        session['bills'] = session_append(session['bills'], temp.to_json())
+        session['bills'] = session_append(session['bills'], to_json(temp))
+
         return redirect(url_for('bill'))
 
     return render_template('bill.html', title='bill', form=form,
@@ -113,7 +120,8 @@ def debt():
         interest = form.interest_rate.data
         minimum = form.minimum.data
         temp = debts.Debt(name, principal, interest, minimum)
-        session['debts'] = session_append(session['debts'], temp.to_json())
+        session['debts'] = session_append(session['debts'], to_json(temp))
+
         return redirect(url_for('debt'))
 
     return render_template('debt.html', title='Debt', form=form, income=session['income'])

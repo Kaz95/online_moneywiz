@@ -6,9 +6,6 @@ class PayDay:
         self.amount = amount
         self.date = date
 
-    def to_json(self):
-        return self.__dict__
-
     # Creates and returns a PayDay object from json(dictionary)
     @staticmethod
     def from_json(some_json):

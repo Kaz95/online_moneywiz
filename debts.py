@@ -10,9 +10,6 @@ class Debt:
 
         self.interest_incurred = 0
 
-    def to_json(self):
-        return self.__dict__
-
     # Creates and returns a Debt object from json(dictionary). Converts whole number percent to decimal.
     @staticmethod
     def from_json(some_json):
