@@ -1,18 +1,23 @@
 # Handles all bill related backend
+
+
 class PayDay:
 
     def __init__(self, amount, date):
         self.amount = amount
         self.date = date
 
+    # TODO: Consider making this a 'helper' function instead of a class method.
     def to_json(self):
         return self.__dict__
 
+    # Creates and returns a PayDay object from json(dictionary)
     @staticmethod
     def from_json(some_json):
         temp = PayDay(some_json['amount'], some_json['date'])
         return temp
 
+    # Returns the sum of a list of objects by accessing their amount attribute.
     @staticmethod
     def add_amounts(some_list):
         total = 0
@@ -29,11 +34,13 @@ class Bill(PayDay):
         PayDay.__init__(self, amount, date)
         self.name = name
 
+    # Creates and returns a Bill object from json(dictionary)
     @staticmethod
     def from_json(some_json):
         temp = Bill(some_json['name'], some_json['amount'], some_json['date'])
         return temp
 
+    # Separates a list of Bill objects into one of two lists, based on a given range.
     @staticmethod
     def separate_bills(list_of_bills, middle_range):
         pp1 = []
@@ -65,7 +72,6 @@ def construct_output_string(some_dict):
 # Main bills function. Returns an pre-formatted output string.
 def run(payday_list, bills_list, payday1, payday2):
     # Create a dictionary to hold values used for string output
-    enough = None
     output_dictionary = {'leftover': None}
 
     # Find totals of each list of objects
