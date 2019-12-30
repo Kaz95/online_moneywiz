@@ -10,9 +10,11 @@ class Debt:
 
         self.interest_incurred = 0
 
+    # TODO: Consider making this a 'helper' function instead of a class method.
     def to_json(self):
         return self.__dict__
 
+    # Creates and returns a Debt object from json(dictionary). Converts whole number percent to decimal.
     @staticmethod
     def from_json(some_json):
         percent_interest = some_json['interest']
@@ -21,12 +23,14 @@ class Debt:
         return temp
 
 
+# Helper class for linked list.
 class Node:
     def __init__(self, data):
         self.data = data
         self.next = None
 
 
+# TODO: Look this over for fat.
 # Purpose modified linked list class definition
 class LinkedList:
 
@@ -261,6 +265,7 @@ class LinkedList:
         return text
 
 
+# TODO: Preserve test case and remove.
 # Only used for exploratory testing. Remove at some point.
 def run(income=None):
     # Test debts
