@@ -109,8 +109,6 @@ def income():
 # Route for adding debt objects. If input validates, a Debt object is created.
 # The object is then serialized into json and added to the session.
 # The route uses a single submit button. An html button acts as the redirect trigger.
-# TODO: I'm wondering if this option is inherently insecure.
-#  The path the button redirects to can be changed because the client is handling it...I think
 @app.route('/debt', methods=['POST', 'GET'])
 def debt():
     form = DebtForm()
@@ -127,6 +125,11 @@ def debt():
     return render_template('debt.html', title='Debt', form=form, income=session['income'])
 
 
+# TODO: Implement this helper function
+def deserialize_to_list(session_list, new_list):
+    pass
+
+
 # Route for 'bills route' output. The real logic happens here using the variables assigned to the session before hand.
 # See relevant modules for more information.
 @app.route('/bill_output')
@@ -135,7 +138,6 @@ def bill_output():
     paydays_list = []
     bills_list = []
 
-    # TODO: Turn this into a helper function.
     for i in session['paydays']:
         paydays_list.append(bills.PayDay.from_json(i))
     for i in session['bills']:
@@ -146,7 +148,6 @@ def bill_output():
     print(type(paydays_list[0].amount))
     print(type(paydays_list[0].date))
 
-    # TODO: Clean up variables returned. I don't think I use half of these.
     some_string, some_dict, enough, leftover = bills.run(paydays_list, bills_list, paydays_list[0], paydays_list[1])
 
     return render_template('bill_output.html', title='Bill Output', enough=enough, leftover=leftover)

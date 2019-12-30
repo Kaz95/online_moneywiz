@@ -7,7 +7,6 @@ class PayDay:
         self.amount = amount
         self.date = date
 
-    # TODO: Consider making this a 'helper' function instead of a class method.
     def to_json(self):
         return self.__dict__
 
@@ -55,10 +54,9 @@ class Bill(PayDay):
 
 
 # Parses a dictionary and uses value retrieved for text output.
-# If passed False as a param, assumes not enough money.
-# TODO: Wouldn't passing an empty dict do the same thing, but be more intuitive?
+# If passed a dictionary with leftover as None as a param, assumes not enough money.
 def construct_output_string(some_dict):
-    if some_dict:
+    if some_dict['leftover'] is not None:
         text = "You have enough!" \
                f"You have {some_dict['leftover']} leftover" \
                "Save some amount from some pay period. Fix ASAP"
@@ -87,7 +85,7 @@ def run(payday_list, bills_list, payday1, payday2):
     if left_over < 0:
         print("You don't have enough money!")
         enough = False
-        output_dictionary = False
+        # output_dictionary = False
 
     # If leftover is greater than 0 assign it as a value of its respective key.
     else:
