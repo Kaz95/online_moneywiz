@@ -55,20 +55,13 @@ def payday():
         amount = form.amount.data
         date = form.date.data
         temp = bills.PayDay(amount, date)
-        print(session)
 
         if 'paydays' not in session:
-            print('p1 did not exist; now does')
             session['paydays'] = []
             session['paydays'] = session_append(session['paydays'], temp.to_json())
-            print(session)
-            print(session['paydays'])
             return redirect(url_for('payday'))
         else:
             session['paydays'] = session_append(session['paydays'], temp.to_json())
-            print('p1 exists; now p2 does as well')
-            print(session)
-            print(session['paydays'])
             return redirect(url_for('bill'))
 
     return render_template('payday.html', title='Payday', form=form)
@@ -90,9 +83,6 @@ def bill():
         date = form.date.data
         temp = bills.Bill(name, amount, date)
         session['bills'] = session_append(session['bills'], temp.to_json())
-        print(session)
-        print(session['bills'])
-
         return redirect(url_for('bill'))
 
     return render_template('bill.html', title='bill', form=form,
@@ -141,11 +131,6 @@ def bill_output():
         paydays_list.append(bills.PayDay.from_json(i))
     for i in session['bills']:
         bills_list.append(bills.Bill.from_json(i))
-
-    print(type(bills_list[0].amount))
-    print(type(bills_list[0].date))
-    print(type(paydays_list[0].amount))
-    print(type(paydays_list[0].date))
 
     some_string, some_dict, enough, leftover = bills.run(paydays_list, bills_list, paydays_list[0], paydays_list[1])
 
