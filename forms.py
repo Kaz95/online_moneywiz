@@ -3,6 +3,9 @@ from wtforms import StringField, SubmitField
 from wtforms.fields.html5 import IntegerField
 from wtforms.validators import DataRequired, Length, NumberRange
 
+# Forms - Used in templates
+# HTML5 Number field is used instead of base WTForms IntegerField to get the input to render as a spinbox.
+
 
 class PaydayForm(FlaskForm):
     amount = IntegerField('Amount',
@@ -58,4 +61,6 @@ class DebtForm(FlaskForm):
                            render_kw={'placeholder': 'Minimum', 'min': 0, 'max': 99999},
                            default=10)
     add_debt = SubmitField('Add Debt')
+
+    # TODO: Not currently used.
     done = SubmitField('Done')
