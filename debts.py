@@ -83,7 +83,7 @@ class LinkedList:
         else:
             cur, prev = self.prime_cursors()
             while cur is not None:
-                if node.data.interest < cur.data.interest:
+                if node.data.interest <= cur.data.interest:
                     cur, prev = LinkedList.move_cursors(cur)
                 elif prev is None:
                     self.insert_new_head(node)
@@ -93,7 +93,7 @@ class LinkedList:
                     break
 
             if cur is None:
-                if node.data.interest < prev.data.interest:
+                if node.data.interest <= prev.data.interest:
                     prev.next = node
                 else:
                     self.insert_new_head(node)
