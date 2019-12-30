@@ -4,19 +4,32 @@ import bills
 import debts
 
 app = Flask(__name__)
+
+# Secret key is required for all encryption.
+# A dummy key is currently being used for development.
+# Will be swapped to a key set via environmental variable or some shits for security.
 app.config['SECRET_KEY'] = 'dev'
 
 
+# TODO: Test This
+# Helper function to append to lists within the section dictionary.
+# Was having trouble accessing the lists directly. Probably do to some underlying implementation detail of sessions.
 def session_append(session_list, apendee):
     temp = session_list
     temp.append(apendee)
     return temp
 
 
+# TODO: Test this
+# Helper function to strip excess whitespace from object names.
 def strip_whitespace(some_string):
     return " ".join(some_string.split())
 
 
+# Routes
+
+# Home/index route. Not sure if should call it index in flask.
+# Clears current session and creates some session lists as setup.
 @app.route('/')
 @app.route('/home')
 def home():
@@ -28,6 +41,9 @@ def home():
     return render_template('home.html')
 
 
+# Route for adding payday objects. If input validates, a PayDay object is created.
+# The object is then serialized into json. The route has logic to determine how many paydays have been added.
+# Route redirects after two paydays have been added.
 @app.route('/payday', methods=['POST', 'GET'])
 def payday():
     form = PaydayForm()
@@ -62,6 +78,10 @@ def payday():
     return render_template('payday.html', title='Payday', form=form)
 
 
+# Route for adding bill objects. If input validates, a Bill object is created.
+# The object is then serialized into json and added to the session.
+# The route employs a form with two submit buttons. One is used for submission, while the other is used as a done flag.
+# Route redirects on 'done' flag without validating or submitting current data.
 @app.route('/bill', methods=['POST', 'GET'])
 def bill():
     form = BillForm()
@@ -92,6 +112,7 @@ def bill():
                            p2a=session['paydays'][1]['amount'], p2d=session['paydays'][1]['date'])
 
 
+# Route for getting income variable. Stored as session variable.
 @app.route('/income', methods=['POST', 'GET'])
 def income():
     form = IncomeForm()
@@ -102,6 +123,11 @@ def income():
     return render_template('income.html', title='Income', form=form)
 
 
+# Route for adding debt objects. If input validates, a Debt object is created.
+# The object is then serialized into json and added to the session.
+# The route uses a single submit button. An html button acts as the redirect trigger.
+# TODO: I'm wondering if this option is inherently insecure.
+#  The path the button redirects to can be changed because the client is handling it...I think
 @app.route('/debt', methods=['POST', 'GET'])
 def debt():
     form = DebtForm()
@@ -118,12 +144,15 @@ def debt():
     return render_template('debt.html', title='Debt', form=form, income=session['income'])
 
 
+# Route for 'bills route' output. The real logic happens here using the variables assigned to the session before hand.
+# See relevant modules for more information.
 @app.route('/bill_output')
 def bill_output():
 
     paydays_list = []
     bills_list = []
 
+    # TODO: Turn this into a helper function.
     for i in session['paydays']:
         paydays_list.append(bills.PayDay.from_json(i))
     for i in session['bills']:
@@ -134,11 +163,14 @@ def bill_output():
     print(type(paydays_list[0].amount))
     print(type(paydays_list[0].date))
 
+    # TODO: Clean up variables returned. I don't think I use half of these.
     some_string, some_dict, enough, leftover = bills.run(paydays_list, bills_list, paydays_list[0], paydays_list[1])
 
     return render_template('bill_output.html', title='Bill Output', enough=enough, leftover=leftover)
 
 
+# Route for 'debt route' output. The real logic happens here using the variables assigned to the session before hand.
+# See relevant modules for more information.
 @app.route('/debt_output')
 def debt_output():
     linked_list = debts.LinkedList()
