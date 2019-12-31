@@ -139,9 +139,11 @@ def bill_output():
     for i in session['bills']:
         bills_list.append(bills.Bill.from_json(i))
 
-    enough, leftover = bills.run(paydays_list, bills_list, paydays_list[0], paydays_list[1])
+    print(paydays_list[0].date, '-', paydays_list[1].date)
 
-    return render_template('bill_output.html', title='Bill Output', enough=enough, leftover=leftover)
+    enough, leftover, what_do = bills.run(paydays_list, bills_list, paydays_list[0], paydays_list[1])
+
+    return render_template('bill_output.html', title='Bill Output', enough=enough, leftover=leftover, what_do=what_do)
 
 
 # Route for 'debt route' output. The real logic happens here using the variables assigned to the session before hand.

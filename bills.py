@@ -48,8 +48,19 @@ class Bill(PayDay):
         return pp1, pp2
 
 
+def find_first(p1, p2):
+    if p1.date < p2.date:
+        first_payday = p1
+        second_payday = p2
+    else:
+        first_payday = p2
+        second_payday = p1
+    return first_payday, second_payday
+
+
 # Main bills function. Returns an pre-formatted output string.
 def run(payday_list, bills_list, payday1, payday2):
+    what_do = None
     # Find totals of each list of objects
     paydays_sum = PayDay.add_amounts(payday_list)
     bills_sum = Bill.add_amounts(bills_list)
@@ -58,8 +69,6 @@ def run(payday_list, bills_list, payday1, payday2):
     left_over = paydays_sum - bills_sum
 
     # Decide if there is enough money overall
-
-    # Changing output_dictionary to False signifies not having enough money.
     if left_over < 0:
         print("You don't have enough money!")
         enough = False
@@ -70,13 +79,11 @@ def run(payday_list, bills_list, payday1, payday2):
         print("You have enough money!")
         print(f"You have {left_over} left over")
 
-        # Figure out which payday comes first in the month
-        first_payday = min(payday1.date, payday2.date)
-        second_payday = max(payday1.date, payday2.date)
+        first_payday, second_payday = find_first(payday1, payday2)
 
         # Middle range will be the days covered by the first payday
         # All other days not in this range will be covered bt the second payday
-        middle_range = range(first_payday, second_payday)
+        middle_range = range(first_payday.date, second_payday.date)
         # Separate the bills into two lists, each representing a given pay period
         first_pay_period, second_pay_period = Bill.separate_bills(bills_list, middle_range)
 
@@ -85,11 +92,14 @@ def run(payday_list, bills_list, payday1, payday2):
         pp2sum = Bill.add_amounts(second_pay_period)
 
         # Logic that determines which pay period has a surplus, or if both do.
-        if payday1.amount > pp1sum and payday2.amount > pp2sum:
+        if first_payday.amount >= pp1sum and second_payday.amount >= pp2sum:
             print("I'm rich bitch!")
-        elif payday1.amount < pp1sum:
-            print(f"Save {pp1sum - payday1.amount} from pp2")
+            what_do = "I'm rich bitch!"
+        elif first_payday.amount < pp1sum:
+            print(f"Save {pp1sum - first_payday.amount} from pp2")
+            what_do = f"Save {pp1sum - first_payday.amount} from pp2"
         else:
-            print(f"Save {pp2sum - payday2.amount} from pp1")
+            print(f"Save {pp2sum - second_payday.amount} from pp1")
+            what_do = f"Save {pp2sum - second_payday.amount} from pp1"
 
-    return enough, left_over
+    return enough, left_over, what_do
