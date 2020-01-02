@@ -48,6 +48,7 @@ class Bill(PayDay):
         return pp1, pp2
 
 
+# TODO: Should be a static method probably.
 def find_first(p1, p2):
     if p1.date < p2.date:
         first_payday = p1
@@ -73,16 +74,21 @@ def run(payday_list, bills_list, payday1, payday2):
         print("You don't have enough money!")
         enough = False
 
-    # If leftover is greater than 0 assign it as a value of its respective key.
     else:
         enough = True
         print("You have enough money!")
         print(f"You have {left_over} left over")
 
+        # If paydays are same date there's no separation needed.
+        # Already sure there is enough overall, so, done.
+        if payday1.date == payday2.date:
+            what_do = "I'm rich bitch"
+            return enough, left_over, what_do
+
         first_payday, second_payday = find_first(payday1, payday2)
 
         # Middle range will be the days covered by the first payday
-        # All other days not in this range will be covered bt the second payday
+        # All other days not in this range will be covered by the second payday
         middle_range = range(first_payday.date, second_payday.date)
         # Separate the bills into two lists, each representing a given pay period
         first_pay_period, second_pay_period = Bill.separate_bills(bills_list, middle_range)
@@ -92,6 +98,7 @@ def run(payday_list, bills_list, payday1, payday2):
         pp2sum = Bill.add_amounts(second_pay_period)
 
         # Logic that determines which pay period has a surplus, or if both do.
+
         if first_payday.amount >= pp1sum and second_payday.amount >= pp2sum:
             print("I'm rich bitch!")
             what_do = "I'm rich bitch!"
