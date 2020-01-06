@@ -7,16 +7,6 @@
         {% else %}
             <title>MoneyWiz</title>
         {% endif %}
-
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <ul class=flashes>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
     </head>
     <body>
         {% if title %}
@@ -38,6 +28,16 @@
             <li><a {% if id == active_page %} class="active"{% endif %} href="{{ href|e }}">{{ caption|e }}</a></li>
             {% endfor %}
         </ul>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
 
         {% block some_content %}{% endblock %}
     </body>
