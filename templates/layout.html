@@ -16,16 +16,16 @@
         {% endif %}
 
         {% set navigation_bar = [
-            ('/', 'home', 'Home'),
-            ('/payday', 'bill', 'Bills'),
-            ('/income', 'debt', 'Debt')
+            (url_for('home'), 'home', 'Home'),
+            (url_for('payday'), 'bill', 'Bills'),
+            (url_for('income'), 'debt', 'Debt')
         ] -%}
 
-        {% set active_page = active_page|default('home') %}
+        {% set active_page = active_page|default('home') -%}
 
         <ul>
             {% for href, id, caption in navigation_bar %}
-            <li><a {% if id == active_page %} class="active"{% endif %} href="{{ href }}">{{ caption }}</a></li>
+            <li><a {% if id == active_page %} class="active"{% endif %} href="{{ href|e }}">{{ caption|e }}</a></li>
             {% endfor %}
         </ul>
 
