@@ -9,26 +9,39 @@
     <h5>Amount: {{ p2a }}</h5>
     <h5>Date: {{ p2d }}</h5>
 
-    <div>
+{#    <div>#}
+{#        <form action="" method="post">#}
+{#            {{ form.hidden_tag() }}#}
+{#            <div>#}
+{#                {{ form.name.label }}#}
+{#                {{ form.name }}#}
+{#            </div>#}
+{#            <div>#}
+{#                {{ form.amount.label }}#}
+{#                {{ form.amount }}#}
+{#            </div>#}
+{#            <div>#}
+{#                {{ form.date.label }}#}
+{#                {{ form.date }}#}
+{#            </div>#}
+{#            <div>#}
+{#                {{ form.add_bill }}#}
+{#                {{ form.done }}#}
+{#            </div>#}
+{#        </form>#}
+{#    </div>#}
+
+    <div class="form">
         <form action="" method="post">
             {{ form.hidden_tag() }}
-            <div>
-                {{ form.name.label }}
-                {{ form.name }}
-            </div>
-            <div>
-                {{ form.amount.label }}
-                {{ form.amount }}
-            </div>
-            <div>
-                {{ form.date.label }}
-                {{ form.date }}
-            </div>
-            <div>
-                {{ form.add_bill }}
-                {{ form.done }}
-            </div>
+            {{ form.name.label }}
+            {{ form.name }}
+            {{ form.amount.label }}
+            {{ form.amount }}
+            {{ form.date.label }}
+            {{ form.date }}
+            {{ form.add_bill }}
+            {{ form.done }}
         </form>
     </div>
-
 {% endblock %}

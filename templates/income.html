@@ -1,14 +1,23 @@
 {% extends 'layout.html' %}
 {% set active_page = 'debt' %}
 {% block some_content %}
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        <div>
+{#    <form action="" method="post">#}
+{#        {{ form.hidden_tag() }}#}
+{#        <div>#}
+{#            {{ form.amount.label }}#}
+{#            {{ form.amount }}#}
+{#        </div>#}
+{#        <div>#}
+{#            {{ form.submit }}#}
+{#        </div>#}
+{#    </form>#}
+
+    <div class="form">
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
             {{ form.amount.label }}
             {{ form.amount }}
-        </div>
-        <div>
             {{ form.submit }}
-        </div>
-    </form>
+        </form>
+    </div>
 {% endblock %}

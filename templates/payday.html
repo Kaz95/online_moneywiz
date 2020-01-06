@@ -1,20 +1,30 @@
 {% extends 'layout.html' %}
 {% set active_page = 'bill' %}
 {% block some_content %}
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        <div>
+{#    <form action="" method="post">#}
+{#        {{ form.hidden_tag() }}#}
+{#        <div>#}
+{#            {{ form.amount.label }}#}
+{#            {{ form.amount }}#}
+{#        </div>#}
+{#        <div>#}
+{#            {{ form.date.label }}#}
+{#            {{ form.date }}#}
+{#        </div>#}
+{#        <div>#}
+{#            {{ form.submit }}#}
+{#        </div>#}
+{#    </form>#}
+    <div class="form">
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
             {{ form.amount.label }}
             {{ form.amount }}
-        </div>
-        <div>
             {{ form.date.label }}
-{#            {{ form.date(min=1, max=31) }}#}
             {{ form.date }}
-        </div>
-        <div>
             {{ form.submit }}
-        </div>
-    </form>
+        </form>
+    </div>
+
 
 {% endblock %}
