@@ -9,6 +9,11 @@
         {% endif %}
     </head>
     <body>
+        {% if title %}
+            <h1>{{ title }}</h1>
+        {% else %}
+            <h1>Ima Page</h1>
+        {% endif %}
         {% block some_content %}{% endblock %}
     </body>
 </html>

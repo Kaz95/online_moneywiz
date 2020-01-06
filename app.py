@@ -45,7 +45,7 @@ def home():
     session.clear()
     session['bills'] = []
     session['debts'] = []
-    return render_template('home.html')
+    return render_template('home.html', title='Online Money Wizard')
 
 
 # Route for adding payday objects. If input validates, a PayDay object is created.
