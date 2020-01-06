@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, session, request
+from flask import Flask, render_template, redirect, url_for, session, request, flash
 from forms import BillForm, PaydayForm, IncomeForm, DebtForm
 import bills
 import debts
@@ -9,6 +9,13 @@ app = Flask(__name__)
 # A dummy key is currently being used for development.
 # Will be swapped to a key set via environmental variable or some shits for security.
 app.config['SECRET_KEY'] = 'dev'
+
+
+def duplicate_name(name, session_list):
+    for i in session_list:
+        if name == i['name']:
+            return True
+    return False
 
 
 # TODO: Implement this helper function
@@ -55,6 +62,7 @@ def home():
 def payday():
     form = PaydayForm()
     if form.validate_on_submit():
+        flash('payday added')
         amount = form.amount.data
         date = form.date.data
         temp = bills.PayDay(amount, date)
@@ -85,6 +93,9 @@ def bill():
 
     if form.validate_on_submit():
         name = strip_whitespace(form.name.data)
+        if duplicate_name(name, session['bills']):
+            flash('Duplicate Name')
+            return redirect(url_for('bill'))
         amount = form.amount.data
         date = form.date.data
         temp = bills.Bill(name, amount, date)
@@ -116,6 +127,9 @@ def debt():
     form = DebtForm()
     if form.validate_on_submit():
         name = strip_whitespace(form.name.data)
+        if duplicate_name(name, session['debts']):
+            flash('Duplicate Name')
+            return redirect(url_for('debt'))
         principal = form.principal.data
         interest = form.interest_rate.data
         minimum = form.minimum.data
