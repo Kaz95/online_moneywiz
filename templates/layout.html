@@ -31,11 +31,11 @@
             </ul>
         </nav>
 
-        {% with messages = get_flashed_messages() %}
+        {% with messages = get_flashed_messages(with_categories=True) %}
             {% if messages %}
                 <ul class="flash_list">
-                {% for message in messages %}
-                    <li class="flash flash-success"><strong>{{ message }}</strong></li>
+                {% for category, message in messages %}
+                    <li class="flash flash-{{ category }}"><strong>{{ message }}</strong></li>
                 {% endfor %}
                 </ul>
             {% endif %}

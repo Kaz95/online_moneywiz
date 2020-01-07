@@ -62,7 +62,7 @@ def home():
 def payday():
     form = PaydayForm()
     if form.validate_on_submit():
-        flash('Payday Added!')
+        flash('Payday Added!', 'success')
         amount = form.amount.data
         date = form.date.data
         temp = bills.PayDay(amount, date)
@@ -94,8 +94,9 @@ def bill():
     if form.validate_on_submit():
         name = strip_whitespace(form.name.data)
         if duplicate_name(name, session['bills']):
-            flash('Duplicate Name')
+            flash('Duplicate Name!', 'error')
             return redirect(url_for('bill'))
+        flash('Bill Added!', 'success')
         amount = form.amount.data
         date = form.date.data
         temp = bills.Bill(name, amount, date)
@@ -113,6 +114,7 @@ def bill():
 def income():
     form = IncomeForm()
     if form.validate_on_submit():
+        flash('Income Added!', 'success')
         session['income'] = form.amount.data
         return redirect(url_for('debt'))
 
@@ -128,8 +130,9 @@ def debt():
     if form.validate_on_submit():
         name = strip_whitespace(form.name.data)
         if duplicate_name(name, session['debts']):
-            flash('Duplicate Name')
+            flash('Duplicate Name!', 'error')
             return redirect(url_for('debt'))
+        flash('Debt Added!', 'success')
         principal = form.principal.data
         interest = form.interest_rate.data
         minimum = form.minimum.data
