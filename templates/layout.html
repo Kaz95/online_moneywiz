@@ -10,9 +10,9 @@
     </head>
     <body>
         {% if title %}
-            <h1>{{ title }}</h1>
+            <h1 class="center banner">{{ title }}</h1>
         {% else %}
-            <h1>Ima Page</h1>
+            <h1 class="center banner">Ima Page</h1>
         {% endif %}
 
         {% set navigation_bar = [
@@ -23,17 +23,19 @@
 
         {% set active_page = active_page|default('home') -%}
 
-        <ul>
-            {% for href, id, caption in navigation_bar %}
-            <li><a {% if id == active_page %} class="active"{% endif %} href="{{ href|e }}">{{ caption|e }}</a></li>
-            {% endfor %}
-        </ul>
+        <nav>
+            <ul>
+                {% for href, id, caption in navigation_bar %}
+                <li><a {% if id == active_page %} class="active"{% endif %} href="{{ href|e }}">{{ caption|e }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
 
         {% with messages = get_flashed_messages() %}
             {% if messages %}
-                <ul class=flashes>
+                <ul class="flash_list">
                 {% for message in messages %}
-                    <li>{{ message }}</li>
+                    <li class="flash flash-success"><strong>{{ message }}</strong></li>
                 {% endfor %}
                 </ul>
             {% endif %}

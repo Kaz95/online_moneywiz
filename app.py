@@ -62,7 +62,7 @@ def home():
 def payday():
     form = PaydayForm()
     if form.validate_on_submit():
-        flash('payday added')
+        flash('Payday Added!')
         amount = form.amount.data
         date = form.date.data
         temp = bills.PayDay(amount, date)
