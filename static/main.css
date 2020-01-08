@@ -6,7 +6,14 @@
 
 .banner {
     color: #45a049;
-    margin-top: 50px;
+    margin-top: 0;
+    margin-bottom: 0;
+    background-color: #f2f2f2;
+}
+a.banner {
+    display: block;
+    text-decoration: none;
+    font-size: 2.5em;
 }
 
 /* Body */
@@ -120,10 +127,11 @@ input[type=submit]:hover, button:hover {
 }
 
 div.form {
+    width: 50%;
     border-radius: 5px;
     background-color: #f2f2f2;
-    padding: 20px;
-    margin: 10px;
+    padding: 20px 20px 40px;
+    margin: 20px auto auto;
 }
 
 /* Flashes */

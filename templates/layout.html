@@ -10,9 +10,9 @@
     </head>
     <body>
         {% if title %}
-            <h1 class="center banner">{{ title }}</h1>
+            <a class="center banner" href="{{ url_for('home') }}">{{ title }}</a>
         {% else %}
-            <h1 class="center banner">Ima Page</h1>
+            <a class="center banner" href="{{ url_for('home') }}" >Ima Page</a>
         {% endif %}
 
         {% set navigation_bar = [
