@@ -1,9 +1,11 @@
 /* Headings */
 .center {
     text-align: center;
+    font-family: "Comic Sans MS", serif;
 }
 
 .banner {
+    color: #45a049;
     margin-top: 50px;
 }
 
@@ -79,19 +81,31 @@ nav a:hover:not(.active) {
 }
 
 /* Forms */
+form {
+    text-align: center;
+    font-weight: bold;
+    font-family: "Comic Sans MS", serif;
+    color: #45a049;
+
+}
 input[type=number], input[type=text] {
-    width: 100%;
+    font-family: "Comic Sans MS", serif;
+    width: 50%;
+    max-width: 600px;
     padding: 12px 20px;
-    margin: 8px 0;
+    margin: auto auto 10px;
     box-sizing: border-box;
-    display: inline-block;
+    display: block;
     border: 1px solid #ccc;
     border-radius: 4px;
+
 }
 
 input[type=submit], button {
-    width: 100%;
-    margin: 8px 0;
+    display: block;
+    margin: auto;
+    width: 50%;
+    max-width: 600px;
     padding: 14px 20px;
     border: none;
     border-radius: 4px;
