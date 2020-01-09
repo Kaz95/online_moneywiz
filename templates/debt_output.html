@@ -1,22 +1,25 @@
 {% extends 'layout.html' %}
 {% set active_page = 'debt' %}
 {% block some_content %}
-    {% if output %}
-        <h1>{{ output }}</h1>
-    {% else %}
-        <h1>Priority</h1>
+    <div id="debt-output">
+        {% if output %}
+            <p>{{ output }}</p>
+        {% else %}
+            <h3>Priority</h3>
             <ol>
             {% for debt in payoff_prio %}
                 <li>{{ debt.data.name }}</li>
             {% endfor %}
             </ol>
-        <br>
-        <h1>Months Until Payoff</h1>
+            <br>
+            <h3>Months Until Payoff</h3>
             <ul>
             {% for debt in payoff_month_dict.items() %}
                 <li>{{ debt[0] }} - {{ debt[1] }} month(s) to payoff</li>
             {% endfor %}
             </ul>
-    {% endif %}
+        {% endif %}
+    </div>
+
     <button onclick="window.location.href = '/'">Home</button>
 {% endblock %}

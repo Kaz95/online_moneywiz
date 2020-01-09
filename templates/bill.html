@@ -1,13 +1,15 @@
 {% extends 'layout.html' %}
 {% set active_page = 'bill' %}
 {% block some_content %}
-    <h1>p1</h1>
-    <h5>Amount: {{ p1a }}</h5>
-    <h5>Date: {{ p1d }}</h5>
-    <br>
-    <h1>p2</h1>
-    <h5>Amount: {{ p2a }}</h5>
-    <h5>Date: {{ p2d }}</h5>
+    <div id="bill_menu">
+        <h3>p1</h3>
+        <p>Amount: {{ p1a }}</p>
+        <p>Date: {{ p1d }}</p>
+        <br>
+        <h3>p2</h3>
+        <p>Amount: {{ p2a }}</p>
+        <p>Date: {{ p2d }}</p>
+    </div>
 
 {#    <div>#}
 {#        <form action="" method="post">#}
@@ -31,7 +33,7 @@
 {#        </form>#}
 {#    </div>#}
 
-    <div class="form">
+    <div class="form bill_menu">
         <form action="" method="post">
             {{ form.hidden_tag() }}
             {{ form.name.label }}
