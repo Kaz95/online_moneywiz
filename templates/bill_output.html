@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% set active_page = 'bill' %}
 {% block some_content %}
-    <div id="bill-output">
+    <div id="bill-output" class="content output">
         {% if enough %}
             <h3>You Have Enough!</h3>
             <p>You have ${{ leftover }} leftover</p>

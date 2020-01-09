@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% set active_page = 'bill' %}
 {% block some_content %}
-    <div id="bill_menu">
+    <div id="bill_menu" class="content">
         <h3>p1</h3>
         <p>Amount: {{ p1a }}</p>
         <p>Date: {{ p1d }}</p>
@@ -33,7 +33,7 @@
 {#        </form>#}
 {#    </div>#}
 
-    <div class="form bill_menu">
+    <div id="bill-form" class="form">
         <form action="" method="post">
             {{ form.hidden_tag() }}
             {{ form.name.label }}
