@@ -18,7 +18,7 @@
         {% set navigation_bar = [
             (url_for('home'), 'home', 'Home'),
             (url_for('payday'), 'bill', 'Bills'),
-            (url_for('income'), 'debt', 'Debt')
+            (url_for('income'), 'debt', 'Debts')
         ] -%}
 
         {% set active_page = active_page|default('home') -%}
