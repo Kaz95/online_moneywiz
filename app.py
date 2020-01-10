@@ -11,6 +11,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'dev'
 
 
+# TODO: Test
 def duplicate_name(name, session_list):
     for obj_dict in session_list:
         if name == obj_dict['name']:
@@ -19,6 +20,7 @@ def duplicate_name(name, session_list):
 
 
 # TODO: Implement this helper function
+# TODO: Test
 def deserialize_to_list(session_list, new_list):
     pass
 

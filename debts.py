@@ -10,6 +10,7 @@ class Debt:
 
         self.interest_incurred = 0
 
+    # TODO: Test
     # Creates and returns a Debt object from json(dictionary). Converts whole number percent to decimal.
     @staticmethod
     def from_json(some_json):
@@ -78,6 +79,7 @@ class LinkedList:
         prev.next = node
         prev.next.next = cur
 
+    # TODO: Test; Create a scenario where all lines are hit. Redo Coverage if needed.
     # Fills linked list with debt object
     # Sorts objects into the list based on interest rate
     # Keeps running tally of minimums
@@ -117,6 +119,7 @@ class LinkedList:
         self.head.data.principal -= spillover
         print(self.head.data.name, round(self.head.data.principal, 2))
 
+    # TODO: Test; While most of the lines are being hit, core functionality is not being tested for proper return value.
     # Single function that calculates and incurs interest
     # Generates interest on head node by default unless a node is passes as param
     def generate_interest(self, cur=None):
@@ -185,6 +188,7 @@ class LinkedList:
                     self.head.data.principal -= spillover
                     self.special_spill()
 
+    # TODO: Test
     # Meat and potatoes function.
     # Iterates through linked list paying down principles and removing paid off nodes.
     # Keeps tracks of number of passes(months)
@@ -241,6 +245,7 @@ class LinkedList:
 
         print(self.pay_off_month_dictionary)
 
+    # TODO: Test
     # Traverse list and append each node to a list
     def preserve_payoff_priority(self):
         cur = self.head
