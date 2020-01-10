@@ -13,10 +13,10 @@ class Debt:
     # Creates and returns a Debt object from json(dictionary). Converts whole number percent to decimal.
     @staticmethod
     def from_json(some_json):
-        percent_interest = some_json['interest']
-        percent_interest = percent_interest / 100
-        temp = Debt(some_json['name'], some_json['principal'], percent_interest, some_json['minimum'])
-        return temp
+        whole_num_interest = some_json['interest']
+        percent_interest = whole_num_interest / 100
+        debt = Debt(some_json['name'], some_json['principal'], percent_interest, some_json['minimum'])
+        return debt
 
 # Test debts
 # d1 = Debt("credit card", 40, .04, 10)
@@ -33,6 +33,7 @@ class Node:
 
 
 # TODO: Look this over for fat.
+# TODO: Consider renaming income to leftover; everywhere.
 # Purpose modified linked list class definition
 class LinkedList:
 
@@ -42,7 +43,7 @@ class LinkedList:
         self.minimums = 0  # Total minimum payment of all debts. Used to calculate if enough money for minimums.
         self.leftover = 0   # L = (Income - minimums)
         self.temp_leftover = 0  # Used to hold leftover during actual iteration. Refilled at the start of each pass.
-        self.months_to_payoff = 0   # ++ once per full pass of linked list
+        self.months_to_payoff = 0   # += 1 once per full pass of linked list
 
         # Used to keep track of which debts have been paid during a given pass.
         # Needed to decide if interest needs recalculating

@@ -18,7 +18,7 @@ class PaydayForm(FlaskForm):
                         render_kw={'placeholder': '1-31', 'min': 1, 'max': 31},
                         default=1)
 
-    submit = SubmitField('Add Payday')
+    add_payday = SubmitField('Add Payday')
 
 
 class BillForm(FlaskForm):
@@ -42,12 +42,12 @@ class BillForm(FlaskForm):
 
 
 class IncomeForm(FlaskForm):
-    amount = IntegerField('Amount',
+    income = IntegerField('Income',
                           validators=[DataRequired(), NumberRange(min=1, max=99999)],
                           render_kw={'placeholder': 'Amount', 'min': 1, 'max': 99999},
                           default=50)
 
-    submit = SubmitField('Add Income')
+    add_income = SubmitField('Add Income')
 
 
 class DebtForm(FlaskForm):
@@ -61,9 +61,9 @@ class DebtForm(FlaskForm):
                              render_kw={'placeholder': 'Principal', 'min': 1, 'max': 99999},
                              default=40)
 
-    interest_rate = IntegerField('Interest Rate',
-                                 validators=[DataRequired(), NumberRange(min=0, max=100)],
-                                 render_kw={'placeholder': 'Interest Rate: 0-100', 'min': 0, 'max': 100})
+    interest = IntegerField('Interest Rate',
+                            validators=[DataRequired(), NumberRange(min=0, max=100)],
+                            render_kw={'placeholder': 'Interest Rate: 0-100', 'min': 0, 'max': 100})
 
     minimum = IntegerField('Minimum',
                            validators=[DataRequired(), NumberRange(min=0, max=99999)],

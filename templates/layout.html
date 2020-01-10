@@ -10,15 +10,15 @@
     </head>
     <body>
         {% if title %}
-            <a class="center banner" href="{{ url_for('home') }}">{{ title }}</a>
+            <a class="comic-center banner" href="{{ url_for('home') }}">{{ title }}</a>
         {% else %}
-            <a class="center banner" href="{{ url_for('home') }}" >Ima Page</a>
+            <a class="comic-center banner" href="{{ url_for('home') }}" >Ima Page</a>
         {% endif %}
 
         {% set navigation_bar = [
             (url_for('home'), 'home', 'Home'),
-            (url_for('payday'), 'bill', 'Bills'),
-            (url_for('income'), 'debt', 'Debts')
+            (url_for('add_payday'), 'bill', 'Bills'),
+            (url_for('add_income'), 'debt', 'Debts')
         ] -%}
 
         {% set active_page = active_page|default('home') -%}

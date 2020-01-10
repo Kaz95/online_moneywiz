@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% set active_page = 'debt' %}
 {% block some_content %}
-    <h2 class="center">Income: ${{ income }}</h2>
+    <h2 class="comic-center">Income: ${{ income }}</h2>
 {#    <form action="" method="post">#}
 {#        {{ form.hidden_tag() }}#}
 {#        <div>#}
@@ -32,8 +32,8 @@
             {{ form.name }}
             {{ form.principal.label }}
             {{ form.principal }}
-            {{ form.interest_rate.label }}
-            {{ form.interest_rate }}
+            {{ form.interest.label }}
+            {{ form.interest }}
             {{ form.minimum.label }}
             {{ form.minimum }}
             {{ form.add_debt }}

@@ -1,18 +1,18 @@
 {% extends 'layout.html' %}
 {% block some_content %}
     <div class="flex-container">
-        <a href="{{ url_for('payday') }}" class="content">
-            <h3 class="center">Bills</h3>
+        <a href="{{ url_for('add_payday') }}" class="content">
+            <h3 class="comic-center">Bills</h3>
             <p>The Bills Option allows the user to add two user defined paydays and an unlimited amount of bills. When the user is ready, they can hit the done button to run the program and see its output on the next page.</p>
         </a>
 
-        <a href="{{ url_for('income') }}"  class="content">
-            <h3 class="center">Debts</h3>
+        <a href="{{ url_for('add_income') }}" class="content">
+            <h3 class="comic-center">Debts</h3>
             <p>The Debts Option allows the user to declare their income after bills, add an unlimited amount of user defined debts, and then finally run the program and view its output.</p>
         </a>
 
         <a onclick="alert('Both will be implemented later')"  class="content">
-            <h3 class="center">Both</h3>
+            <h3 class="comic-center">Both</h3>
             <p>As you may have already surmised, the both option allows the user to run both the bills and debt options one after the other. The 'leftover' amount after bills will automagically be used as 'income' for a 'debts' run.</p>
         </a>
     </div>
