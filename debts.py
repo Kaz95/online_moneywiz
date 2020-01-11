@@ -15,8 +15,8 @@ class Debt:
     @staticmethod
     def from_json(some_json):
         whole_num_interest = some_json['interest']
-        percent_interest = whole_num_interest / 100
-        debt = Debt(some_json['name'], some_json['principal'], percent_interest, some_json['minimum'])
+        # percent_interest = whole_num_interest / 100
+        debt = Debt(some_json['name'], some_json['principal'], whole_num_interest, some_json['minimum'])
         return debt
 
 # Test debts
@@ -188,7 +188,7 @@ class LinkedList:
                     self.head.data.principal -= spillover
                     self.special_spill()
 
-    # TODO: Test
+    # TODO: Test; Whole thing, then go back and write tests for lines that weren't hit.
     # Meat and potatoes function.
     # Iterates through linked list paying down principles and removing paid off nodes.
     # Keeps tracks of number of passes(months)

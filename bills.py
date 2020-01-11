@@ -6,7 +6,6 @@ class PayDay:
         self.amount = amount
         self.date = date
 
-    # TODO: Test
     # Creates and returns a PayDay object from json(dictionary)
     @staticmethod
     def from_json(some_json):
@@ -29,7 +28,6 @@ class Bill(PayDay):
         PayDay.__init__(self, amount, date)
         self.name = name
 
-    # TODO: Test
     # Creates and returns a Bill object from json(dictionary)
     @staticmethod
     def from_json(some_json):
@@ -51,7 +49,6 @@ class Bill(PayDay):
 
 
 # TODO: Should be a static method probably. Also consider passing a set or something to clean up variable name.
-# TODO: Test
 def find_first(p1, p2):
     if p1.date < p2.date:
         first_payday = p1
@@ -65,7 +62,7 @@ def find_first(p1, p2):
 # TODO: Consider passing a set or some shits instead of individual paydays.
 #  There will always be two and it removes the need for adding numbers to var names.
 #  Also Decide if there's a better way to handle the what_do var.
-# TODO: Test
+# TODO: Extend testing to cover edge cases not currently being hit.
 # Main bills function. Returns an pre-formatted output string.
 def run(payday_list, bills_list, payday1, payday2):
     what_do = None

@@ -11,7 +11,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'dev'
 
 
-# TODO: Test
 def duplicate_name(name, session_list):
     for obj_dict in session_list:
         if name == obj_dict['name']:
@@ -19,8 +18,7 @@ def duplicate_name(name, session_list):
     return False
 
 
-# TODO: Implement this helper function
-# TODO: Test
+# TODO: Implement this helper function; Test
 def deserialize_to_list(session_list, new_list):
     pass
 
@@ -29,7 +27,6 @@ def to_json(some_item):
     return some_item.__dict__
 
 
-# TODO: Test This
 # Helper function to append to lists within the section dictionary.
 # Was having trouble accessing the lists directly. Probably do to some underlying implementation detail of sessions.
 def session_append(session_list, apendee):
@@ -38,7 +35,6 @@ def session_append(session_list, apendee):
     return new_list
 
 
-# TODO: Test this
 # Helper function to strip excess whitespace from object names.
 def strip_whitespace(some_string):
     return " ".join(some_string.split())
@@ -178,7 +174,13 @@ def debt_output():
     debts_list = []
 
     for obj_dict in session['debts']:
-        debts_list.append(debts.Debt.from_json(obj_dict))
+        debt = debts.Debt.from_json(obj_dict)
+        print(debt.interest)
+        debt.interest = debt.interest / 100
+        print(debt.interest)
+        # debts_list.append(debts.Debt.from_json(obj_dict))
+        debts_list.append(debt)
+        # print(debts.Debt.from_json(obj_dict).interest)
     for obj_dict in debts_list:
         linked_list.auto_insert(obj_dict)
 
