@@ -154,6 +154,7 @@ def bill_output():
     paydays_list = []
     bills_list = []
 
+    # TODO: Replace with helper function....once i write it.
     for obj_dict in session['paydays']:
         paydays_list.append(bills.PayDay.from_json(obj_dict))
     for obj_dict in session['bills']:
@@ -173,16 +174,15 @@ def debt_output():
     linked_list = debts.LinkedList()
     debts_list = []
 
+    # TODO: Replace with helper function....once i write it.
     for obj_dict in session['debts']:
         debt = debts.Debt.from_json(obj_dict)
-        print(debt.interest)
+        # TODO: Abstract this away before replacing with helper function.
         debt.interest = debt.interest / 100
-        print(debt.interest)
-        # debts_list.append(debts.Debt.from_json(obj_dict))
+
         debts_list.append(debt)
-        # print(debts.Debt.from_json(obj_dict).interest)
-    for obj_dict in debts_list:
-        linked_list.auto_insert(obj_dict)
+    for obj in debts_list:
+        linked_list.auto_insert(obj)
 
     linked_list.income = session['income']
     linked_list.preserve_payoff_priority()

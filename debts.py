@@ -10,7 +10,6 @@ class Debt:
 
         self.interest_incurred = 0
 
-    # TODO: Test
     # Creates and returns a Debt object from json(dictionary). Converts whole number percent to decimal.
     @staticmethod
     def from_json(some_json):
@@ -79,7 +78,6 @@ class LinkedList:
         prev.next = node
         prev.next.next = cur
 
-    # TODO: Test; Create a scenario where all lines are hit. Redo Coverage if needed.
     # Fills linked list with debt object
     # Sorts objects into the list based on interest rate
     # Keeps running tally of minimums
@@ -90,13 +88,20 @@ class LinkedList:
         if self.head is None:
             self.head = node
         else:
+            # Reset Cursor to the start of the list
             cur, prev = self.prime_cursors()
+
             while cur is not None:
+
+                # <= is used to sort in descending order.
                 if node.data.interest <= cur.data.interest:
                     cur, prev = LinkedList.move_cursors(cur)
+
+                # if interest is greater and prev is none than need new head
                 elif prev is None:
                     self.insert_new_head(node)
                     break
+                # else just insert normally before whatever cur node is.
                 else:
                     LinkedList.manual_insertion(node, cur, prev)
                     break
@@ -104,8 +109,8 @@ class LinkedList:
             if cur is None:
                 if node.data.interest <= prev.data.interest:
                     prev.next = node
-                else:
-                    self.insert_new_head(node)
+                # else:
+                #     self.insert_new_head(node)
 
     @staticmethod
     def find_spillover(principal):
@@ -119,7 +124,6 @@ class LinkedList:
         self.head.data.principal -= spillover
         print(self.head.data.name, round(self.head.data.principal, 2))
 
-    # TODO: Test; While most of the lines are being hit, core functionality is not being tested for proper return value.
     # Single function that calculates and incurs interest
     # Generates interest on head node by default unless a node is passes as param
     def generate_interest(self, cur=None):
@@ -188,7 +192,6 @@ class LinkedList:
                     self.head.data.principal -= spillover
                     self.special_spill()
 
-    # TODO: Test; Whole thing, then go back and write tests for lines that weren't hit.
     # Meat and potatoes function.
     # Iterates through linked list paying down principles and removing paid off nodes.
     # Keeps tracks of number of passes(months)
@@ -245,7 +248,6 @@ class LinkedList:
 
         print(self.pay_off_month_dictionary)
 
-    # TODO: Test
     # Traverse list and append each node to a list
     def preserve_payoff_priority(self):
         cur = self.head
