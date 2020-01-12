@@ -10,6 +10,6 @@ EXPOSE 8000
 
 COPY . /app
 
-CMD ["gunicorn", "-b", "0.0.0.0:8000", "app:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:8000", "wsgi:app"]
 #CMD ["python3", "app.py"]
 #CMD ["venv/bin/python", "app.py"]
