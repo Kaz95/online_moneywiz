@@ -1,12 +1,15 @@
 FROM python:3.6-alpine
-RUN adduser -D moneywiz
-WORKDIR /home/moneywiz
-COPY requirements.txt  requirements.txt
+COPY . /app
+WORKDIR /app
+#COPY requirements.txt  requirements.txt
 #RUN python3 -m venv venv
 #RUN venv/bin/pip3 install -r requirements.txt
 RUN pip3 install -r requirements.txt
+RUN pip3 install gunicorn
+EXPOSE 8000
 
-COPY . .
+COPY . /app
 
-CMD ["python3", "app.py"]
+CMD ["gunicorn", "-b", "0.0.0.0:8000", "app:app"]
+#CMD ["python3", "app.py"]
 #CMD ["venv/bin/python", "app.py"]
