@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for, session, request, f
 from forms import BillForm, PaydayForm, IncomeForm, DebtForm
 import bills
 import debts
-
+# from wsgi import app
 app = Flask(__name__)
 
 # Secret key is required for all encryption.
@@ -198,5 +198,5 @@ def debt_output():
                            payoff_month_dict=payoff_month_dict)
 
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+# if __name__ == '__main__':
+#     app.run(debug=True, host='0.0.0.0')

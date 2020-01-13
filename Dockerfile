@@ -11,5 +11,5 @@ EXPOSE 8000
 COPY . /app
 
 CMD ["gunicorn", "-b", "0.0.0.0:8000", "wsgi:app"]
-#CMD ["python3", "app.py"]
-#CMD ["venv/bin/python", "app.py"]
+#CMD ["python3", "routes.py"]
+#CMD ["venv/bin/python", "routes.py"]

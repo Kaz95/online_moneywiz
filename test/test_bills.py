@@ -1,6 +1,6 @@
 import unittest
 
-import app
+import routes
 import bills
 
 
@@ -14,11 +14,11 @@ class TestBills(unittest.TestCase):
         self.b1 = bills.Bill("Insurance", 200, 2)
         self.b2 = bills.Bill("Car", 500, 12)
         self.b3 = bills.Bill("House", 700, 28)
-        self.json_bill = app.to_json(self.b1)
+        self.json_bill = routes.to_json(self.b1)
 
         self.p1 = bills.PayDay(1000, 5)
         self.p2 = bills.PayDay(500, 25)
-        self.json_payday = app.to_json(self.p1)
+        self.json_payday = routes.to_json(self.p1)
 
         self.bills = [self.b1, self.b2, self.b3]
         self.paydays = [self.p1, self.p2]
