@@ -1,8 +1,6 @@
 import unittest
 
-import routes
-import bills
-import debts
+from online_moneywiz import routes, bills, debts
 
 
 # class MyTestCase(unittest.TestCase):

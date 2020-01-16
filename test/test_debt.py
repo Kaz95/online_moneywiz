@@ -1,5 +1,5 @@
 import unittest
-import debts
+from online_moneywiz import debts
 
 
 # class MyTestCase(unittest.TestCase):

@@ -1,9 +1,8 @@
 from flask import Flask, render_template, redirect, url_for, session, request, flash
-from forms import BillForm, PaydayForm, IncomeForm, DebtForm
-import bills
-import debts
-# from wsgi import app
-app = Flask(__name__)
+from online_moneywiz.forms import BillForm, PaydayForm, IncomeForm, DebtForm
+from online_moneywiz import bills, debts
+
+from online_moneywiz import app
 
 # Secret key is required for all encryption.
 # A dummy key is currently being used for development.
